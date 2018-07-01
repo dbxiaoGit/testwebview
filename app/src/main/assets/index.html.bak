@@ -1,0 +1,63 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>webview</title>
+    <style type="text/css">
+        body {
+            background: #cbcc1a;
+            border-bottom:solid 1px green;
+            border-left:solid 1px gray;
+            border-right:solid 1px blue;
+            border-top:solid 1px red;
+        }
+        /*
+        .btn {
+            line-height: 48px;
+            margin: 10px;
+            background: #cccccc;
+        }
+        */
+    </style>
+</head>
+<body>
+    <h2>webview区域</h2>
+    <div>
+        <span>输入传给native的值：</span> <input type="text" id="input">
+        <button id="btn" onclick="to_native()">点我传给native</button>
+    </div>
+    <div>
+        <!--<span class="btn">点我</span > -->
+
+    </div>
+    <hr/>
+    <div>
+        <h3>下面是由native传过来的值：</h3>
+        <input type="text" id="recivediv">
+    </div>
+    <script type="text/javascript">
+        var btnEle = document.getElementById("btn");
+        var inputEle = document.getElementById("input");
+        btnEle.addEventListener("click",function(){
+            var str = inputEle.value;
+            alert(str);
+            alert(window.mylauncher);
+            if(window.mylauncher){
+                 mylauncher.setValue(str);
+            } else {
+                alert("mylauncher not found ");
+            }
+        });
+        var remote = function(str){
+            document.getElementById("recivediv").value=str;
+        }
+
+        function to_native(){
+            if(window.mylauncher){
+                 mylauncher.setValue(document.getElementById("input").value);
+            } else {
+                alert("mylauncher not found ");
+            }
+        }
+    </script>
+</body>
+</html>
